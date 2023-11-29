@@ -180,18 +180,6 @@ tidy.LOGISTIC <- function(x, ...) {
 
 #' @export
 report.LOGISTIC <- function(object, digits = max(3, getOption("digits") - 3), ...) {
-  cat("\nResiduals:\n")
-  glance <- glance(object)
-  intercept <- "(Intercept)" %in% rownames(object$coef)
-
-  rdf <- glance$df.residual
-  if (rdf > 5L) {
-    res <- residuals(object)
-    res_qt <- zapsmall(stats::quantile(res, na.rm = TRUE))
-    names(res_qt) <- c("Min", "1Q", "Median", "3Q", "Max")
-    print(res_qt, digits = digits, ...)
-  }
-
   cat("\nCoefficients:\n")
   coef <- tidy(object)
   coef_mat <- as.matrix(coef[ncol(coef) - c(3:0)])
@@ -201,21 +189,8 @@ report.LOGISTIC <- function(object, digits = max(3, getOption("digits") - 3), ..
     digits = digits,
     signif.stars = getOption("show.signif.stars"), ...
   )
-
-  cat(sprintf(
-    "\nResidual standard error: %s on %s degrees of freedom\n",
-    format(signif(sqrt(glance$sigma2), digits)), rdf
-  ))
-  if (!is.na(glance$statistic)) {
-    cat(sprintf(
-      "Multiple R-squared: %s,\tAdjusted R-squared: %s\nF-statistic: %s on %s and %s DF, p-value: %s\n",
-      formatC(glance$r_squared, digits = digits),
-      formatC(glance$adj_r_squared, digits = digits),
-      formatC(glance$statistic, digits = digits),
-      format(glance$rank - intercept), format(rdf),
-      format.pval(glance$p_value)
-    ))
-  }
+  cat("\n")
+  glance(object) |> print()
   invisible(object)
 }
 
@@ -309,7 +284,6 @@ refit.LOGISTIC <- function(object, new_data, specials = NULL, reestimate = FALSE
   # Transform back to probability
   fit$fitted.values <- exp(pred)/(1+exp(pred))
   fit$residuals <- y - fit$fitted.values
-  fit$sigma2 <- sum(fit$residuals^2, na.rm = TRUE)/fit$df.residual
 
   structure(fit, class = "LOGISTIC")
 }
