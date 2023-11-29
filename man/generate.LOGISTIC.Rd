@@ -4,7 +4,7 @@
 \alias{generate.LOGISTIC}
 \title{Generate new data from a fable model}
 \usage{
-\method{generate}{LOGISTIC}(x, new_data, specials, bootstrap = FALSE, ...)
+\method{generate}{LOGISTIC}(x, new_data, specials, ...)
 }
 \arguments{
 \item{x}{An object.}
@@ -12,8 +12,6 @@
 \item{new_data}{A tsibble containing the time points and exogenous regressors to produce forecasts for.}
 
 \item{specials}{(passed by \code{\link[fabletools:generate.mdl_df]{fabletools::generate.mdl_df()}}).}
-
-\item{bootstrap}{If \code{TRUE}, then innovations are sampled from the model's residuals.}
 
 \item{...}{Other arguments passed to methods}
 }

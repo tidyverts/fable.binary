@@ -268,8 +268,8 @@ report.LOGISTIC <- function(object, digits = max(3, getOption("digits") - 3), ..
 #'   model(logistic  = LOGISTIC(y ~ season())) %>%
 #'   forecast()
 #' @export
-forecast.LOGISTIC <- function(object, new_data, specials = NULL, bootstrap = FALSE,
-                          approx_normal = TRUE, times = 5000, ...) {
+forecast.LOGISTIC <- function(object, new_data, 
+              specials = NULL, simulate = FALSE, times = 5000, ...) {
   coef <- object$coefficients
   rank <- object$rank
   qr <- object$qr
@@ -281,34 +281,23 @@ forecast.LOGISTIC <- function(object, new_data, specials = NULL, bootstrap = FAL
   if (rank < ncol(xreg)) {
     warn("prediction from a rank-deficient fit may be misleading")
   }
+  # Forecast distributions
+  fc <- drop(xreg[, piv, drop = FALSE] %*% coef[piv])
+  fc <- exp(fc)/(1+exp(fc))
 
-  # Intervals
-  if (bootstrap) { # Compute prediction intervals using simulations
-    sim <- map(seq_len(times), function(x) {
-      generate(object, new_data, specials, bootstrap = TRUE)[[".sim"]]
-    }) %>%
-      transpose() %>%
-      map(as.numeric)
-    distributional::dist_sample(sim)
-  } else {
-    fc <- drop(xreg[, piv, drop = FALSE] %*% coef[piv])
-    resvar <- object$sigma2
-
-    if (rank > 0) {
-      XRinv <- xreg[, piv] %*% qr.solve(qr.R(qr)[seq_len(rank), seq_len(rank)])
-      ip <- drop(XRinv^2 %*% rep(resvar, rank))
-    }
-    else {
-      ip <- rep(0, length(fc))
-    }
-
-    se <- drop(sqrt(ip + resvar))
-    if(approx_normal){
-      distributional::dist_normal(fc, se)
+  if (simulate) { # Compute prediction intervals using simulations
+    if(times == 0L) {
+      output <- distributional::dist_degenerate(fc)
     } else {
-      distributional::dist_student_t(object$df.residual, fc, se)
-    }
+      sim <- map(pred, function(x) {  
+        rbinom(n = times, size = 1, prob = x)
+      })
+      output <- distributional::dist_sample(sim)
+    } 
+  } else {
+    output <- distributional::dist_binomial(1, fc)
   }
+  return(output)
 }
 
 #' @inherit generate.BINNET
@@ -319,31 +308,15 @@ forecast.LOGISTIC <- function(object, new_data, specials = NULL, bootstrap = FAL
 #'   model(logistic  = LOGISTIC(y ~ season())) %>%
 #'   generate()
 #' @export
-generate.LOGISTIC <- function(x, new_data, specials, bootstrap = FALSE, ...) {
-  # Get xreg
+generate.LOGISTIC <- function(x, new_data, specials, ...) {
   xreg <- specials$xreg[[1]]
-
   coef <- x$coefficients
   piv <- x$qr$pivot[seq_len(x$rank)]
   pred <- xreg[, piv, drop = FALSE] %*% coef[piv]
-
-  if (!(".innov" %in% names(new_data))) {
-    if (bootstrap) {
-      res <- residuals(x)
-      new_data$.innov <- sample(na.omit(res) - mean(res, na.rm = TRUE),
-        NROW(new_data),
-        replace = TRUE
-      )
-    }
-    else {
-      vars <- x$sigma2
-      new_data$.innov <- stats::rnorm(length(pred), sd = sqrt(vars))
-    }
-  }
-
-  transmute(new_data, .sim = drop(pred + !!sym(".innov")))
+  pred <- exp(pred)/(1+exp(pred))
+  transmute(new_data, 
+    .sim = rbinom(n = NROW(new_data), size = 1, prob = pred))
 }
-
 
 #' Refit a `LOGISTIC`
 #'
