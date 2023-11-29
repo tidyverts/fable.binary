@@ -1,4 +1,4 @@
-Package: binary.fable
+Package: fable.binary
 Title: Forecasting Binary Time Series
 Version: 0.3.2.9000
 Description: Provides a collection of time series forecasting models suitable for binary time series. These models work within the 'fable' framework provided by the 'fabletools' package, which provides the tools to evaluate, visualise, and combine models in a workflow consistent with the tidyverse.
@@ -12,8 +12,8 @@ Authors@R:
              email = "mail@mitchelloharawild.com",
              role = "aut"))
 License: GPL-3
-URL: https://github.com/robjhyndman/binary.fable
-BugReports: https://github.com/robjhyndman/binary.fable/issues
+URL: https://github.com/robjhyndman/fable.binary
+BugReports: https://github.com/robjhyndman/fable.binary/issues
 Depends:
     R (>= 3.4.0),
     fabletools (>= 0.3.0)
@@ -21,7 +21,7 @@ Imports:
     rlang (>= 0.4.6),
     stats,
     dplyr (>= 1.0.0),
-    purrr, 
+    purrr,
     tsibble (>= 0.9.0),
     tidyr,
     distributional

@@ -1,3 +1,3 @@
-# binary.fable (development version)
+# fable.binary (development version)
 
  * Added LOGISTIC and BINNET models
