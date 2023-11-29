@@ -307,7 +307,12 @@ residuals.BINNET <- function(object, ...) {
 #'   glance()
 #' @export
 glance.BINNET <- function(x, ...) {
-  x$fit
+  tibble(inputs = x$model[[1]]$n[1L],
+         hidden_nodes = x$model[[1]]$n[2L],
+         weights = length(x$model[[1]]$wts),
+         repeats = length(x$model),
+         sigma2 = x$fit$sigma2)
+  
 }
 
 #' Tidy a fable model
@@ -323,9 +328,7 @@ glance.BINNET <- function(x, ...) {
 #'   tidy()
 #' @export
 tidy.BINNET <- function(x, ...) {
-  tibble(term = c("inputs", "hidden-nodes", "weights", "repeats"),
-    estimate = c(x$model[[1]]$n[1L:2L], length(x$model[[1]]$wts), length(x$model)) 
-  )
+  tibble::tibble(term = character(0), estimate = numeric(0))
 }
 
 #' @export
