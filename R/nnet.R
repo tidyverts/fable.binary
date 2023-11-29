@@ -26,13 +26,14 @@ train_nnet <- function(.data, specials, n_nodes, n_networks, scale_inputs, wts =
   }
 
   # Scale inputs
-  y_scale <- xreg_scale <- NULL
+  xreg_scale <- NULL
   if (is.list(scale_inputs)) {
     if(!is.null(xreg)){
       xreg <- sweep(xreg, 2, scale_inputs$xreg$center, "-")
       xreg <- sweep(xreg, 2, scale_inputs$xreg$scale, "/")
     }
-    scales <- scale_inputs <- TRUE
+    scales <- scale_inputs
+    scale_inputs <- TRUE
   } else {
     if (scale_inputs) {
       if (!is.null(xreg)) {
