@@ -31,5 +31,15 @@ remotes::install_github("robjhyndman/fable.binary")
 ## Examples
 
 ```{r example, echo = TRUE}
-
+fit <- melb_rain |>
+  model(
+    nn = BINNET(Wet ~ fourier(K = 2, period = "year")),
+    logistic = LOGISTIC(Wet ~ fourier(K = 2, period = "year"))
+  )
+fit |> tidy()
+fit |> select(logistic) |> glance()
+fit |> select(logistic) |> report()
+fit |> select(nn) |> glance()
+fit |> select(nn) |> report()
+augment(fit)
 ```
