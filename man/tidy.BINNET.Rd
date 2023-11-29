@@ -15,8 +15,7 @@
 Returns the coefficients from the model in a \code{tibble} format.
 }
 \examples{
-as_tsibble(USAccDeaths) |>
-  dplyr::mutate(y = value > mean(value)) |>
-  model(nn = BINNET(y ~ season())) |>
+melb_rain |>
+  model(nn = BINNET(Wet ~ fourier(K = 1, period = "year"))) |>
   tidy()
 }

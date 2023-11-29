@@ -15,7 +15,7 @@
 Extracts the residuals.
 }
 \examples{
-as_tsibble(airmiles) \%>\%
-  model(nn = BINNET(box_cox(value, 0.15))) \%>\%
+melb_rain |>
+  model(nn = BINNET(Wet ~ fourier(K = 1, period = "year"))) |>
   residuals()
 }

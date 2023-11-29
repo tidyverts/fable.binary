@@ -13,19 +13,17 @@
 
 \item{specials}{(passed by \code{\link[fabletools:forecast]{fabletools::forecast.mdl_df()}}).}
 
-\item{simulate}{If \code{TRUE}, then forecast distributions are computed using simulation with Gaussian errors.}
+\item{simulate}{If \code{TRUE}, then forecast distributions are computed using simulation from a Bernoulli model.}
 
-\item{times}{The number of sample paths to use in estimating the forecast distribution when \code{bootstrap = TRUE}.}
+\item{times}{The number of sample paths to use in estimating the forecast distribution when \code{simulate = TRUE}.}
 
 \item{...}{Other arguments passed to methods}
-
-\item{bootstrap}{If \code{TRUE}, then forecast distributions are computed using simulation with resampled errors.}
 }
 \description{
 Produces forecasts from a trained model.
 }
 \examples{
-as_tsibble(airmiles) \%>\%
-  model(nn = BINNET(box_cox(value, 0.15))) \%>\%
+melb_rain |>
+  model(nn = BINNET(Wet ~ fourier(K = 1, period = "year"))) |>
   forecast(times = 10)
 }

@@ -20,24 +20,17 @@
 
 \item{specials}{(passed by \code{\link[fabletools:forecast]{fabletools::forecast.mdl_df()}}).}
 
-\item{simulate}{If \code{TRUE}, then forecast distributions are computed using simulation with Gaussian errors.}
+\item{simulate}{If \code{TRUE}, then forecast distributions are computed using simulation from a Bernoulli model.}
 
-\item{times}{The number of sample paths to use in estimating the forecast distribution when \code{bootstrap = TRUE}.}
+\item{times}{The number of sample paths to use in estimating the forecast distribution when \code{simulate = TRUE}.}
 
 \item{...}{Other arguments passed to methods}
-
-\item{approx_normal}{Should the resulting forecast distributions be
-approximated as a Normal distribution instead of a Student's T
-distribution. Returning Normal distributions (the default) is a useful
-approximation to make it easier for using LOGISTIC models in model combinations
-or reconciliation processes.}
 }
 \description{
 Produces forecasts from a trained model.
 }
 \examples{
-as_tsibble(USAccDeaths) |>
-  dplyr::mutate(y = value > mean(value)) |>
-  model(logistic  = LOGISTIC(y ~ season())) \%>\%
-  forecast()
+melb_rain |>
+  model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
+  forecast(h = "2 years")
 }

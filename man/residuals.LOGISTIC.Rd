@@ -4,10 +4,18 @@
 \alias{residuals.LOGISTIC}
 \title{Extract residuals from a fable model.}
 \usage{
-\method{residuals}{LOGISTIC}(object, ...)
+\method{residuals}{LOGISTIC}(
+  object,
+  type = c("deviance", "innovation", "pearson", "working", "response", "partial"),
+  ...
+)
 }
 \arguments{
 \item{object}{Fitted model}
+
+\item{type}{the type of residuals which should be returned.
+alternatives are: "deviance" (default), "pearson", "working", "response",
+and "partial". Can be abbreviated.}
 
 \item{...}{Other arguments ignored}
 }
@@ -15,8 +23,7 @@
 Extracts the residuals.
 }
 \examples{
-as_tsibble(USAccDeaths) |>
-  dplyr::mutate(y = value > mean(value)) |>
-  model(logistic  = LOGISTIC(y ~ season())) \%>\%
+melb_rain |>
+  model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
   residuals()
 }

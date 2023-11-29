@@ -17,13 +17,9 @@
 }
 \description{
 Simulates future paths from a dataset using a fitted model.
-Innovations are sampled by the model's assumed error distribution.
-If bootstrap is TRUE, innovations will be sampled from the model's residuals.
-If new_data contains the .innov column, those values will be treated as innovations.
 }
 \examples{
-as_tsibble(USAccDeaths) |>
-  dplyr::mutate(y = value > mean(value)) |>
-  model(logistic  = LOGISTIC(y ~ season())) \%>\%
+melb_rain |>
+  model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
   generate()
 }

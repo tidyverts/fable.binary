@@ -45,13 +45,6 @@ glm_glance_measures <- function(fit) {
   )
 }
 
-lm_tidy_measures <- function(fit) {
-  tibble(
-    term = names(coef(fit))[!is.na(coef(fit))] %||% chr(),
-    !!!as_tibble(`colnames<-`(coef(summary(fit)), c("estimate", "std.error", "statistic", "p.value")))
-  )
-}
-
 train_logistic <- function(.data, specials, ...) {
   y <- invoke(cbind, unclass(.data)[measured_vars(.data)])
   xreg <- specials$xreg[[1]]
@@ -146,14 +139,18 @@ fitted.LOGISTIC <- function(object, ...) {
 }
 
 #' @inherit residuals.BINNET
-#'
+#' @param type the type of residuals which should be returned.
+#' alternatives are: "deviance" (default), "pearson", "working", "response",
+#' and "partial". Can be abbreviated.
 #' @examples
 #' melb_rain |>
 #'   model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
 #'   residuals()
 #' @export
-residuals.LOGISTIC <- function(object, ...) {
-  object$residuals
+residuals.LOGISTIC <- function(object,
+  type = c("deviance", "innovation", "pearson", "working", "response", "partial"), ...)
+{
+  return(object$residuals)
 }
 
 #' Glance a LOGISTIC
@@ -248,21 +245,14 @@ report.LOGISTIC <- function(object, digits = max(3, getOption("digits") - 3), ..
 }
 
 #' @inherit forecast.BINNET
-#'
 #' @importFrom stats predict
-#'
-#' @param approx_normal Should the resulting forecast distributions be
-#'   approximated as a Normal distribution instead of a Student's T
-#'   distribution. Returning Normal distributions (the default) is a useful
-#'   approximation to make it easier for using LOGISTIC models in model combinations
-#'   or reconciliation processes.
 #'
 #' @examples
 #' melb_rain |>
 #'   model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
 #'   forecast(h = "2 years")
 #' @export
-forecast.LOGISTIC <- function(object, new_data, 
+forecast.LOGISTIC <- function(object, new_data,
               specials = NULL, simulate = FALSE, times = 5000, ...) {
   coef <- object$coefficients
   rank <- object$rank
@@ -283,11 +273,11 @@ forecast.LOGISTIC <- function(object, new_data,
     if(times == 0L) {
       output <- distributional::dist_degenerate(fc)
     } else {
-      sim <- map(pred, function(x) {  
+      sim <- map(fc, function(x) {
         rbinom(n = times, size = 1, prob = x)
       })
       output <- distributional::dist_sample(sim)
-    } 
+    }
   } else {
     output <- distributional::dist_binomial(1, fc)
   }
@@ -307,7 +297,7 @@ generate.LOGISTIC <- function(x, new_data, specials, ...) {
   piv <- x$qr$pivot[seq_len(x$rank)]
   pred <- xreg[, piv, drop = FALSE] %*% coef[piv]
   pred <- exp(pred)/(1+exp(pred))
-  transmute(new_data, 
+  transmute(new_data,
     .sim = rbinom(n = NROW(new_data), size = 1, prob = pred))
 }
 

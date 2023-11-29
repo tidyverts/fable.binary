@@ -14,17 +14,12 @@
 \item{specials}{(passed by \code{\link[fabletools:generate.mdl_df]{fabletools::generate.mdl_df()}}).}
 
 \item{...}{Other arguments passed to methods}
-
-\item{bootstrap}{If \code{TRUE}, then innovations are sampled from the model's residuals.}
 }
 \description{
 Simulates future paths from a dataset using a fitted model.
-Innovations are sampled by the model's assumed error distribution.
-If bootstrap is TRUE, innovations will be sampled from the model's residuals.
-If new_data contains the .innov column, those values will be treated as innovations.
 }
 \examples{
-as_tsibble(airmiles) \%>\%
-  model(nn = BINNET(box_cox(value, 0.15))) \%>\%
+melb_rain |>
+  model(nn = BINNET(Wet ~ fourier(K = 1, period = "year"))) |>
   generate()
 }

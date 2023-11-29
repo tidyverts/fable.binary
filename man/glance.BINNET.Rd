@@ -19,7 +19,7 @@ Construct a single row summary of the BINNET model.
 Contains the variance of residuals (\code{sigma2}).
 }
 \examples{
-as_tsibble(airmiles) \%>\%
-  model(nn = BINNET(box_cox(value, 0.15))) \%>\%
+melb_rain |>
+  model(nn = BINNET(Wet ~ fourier(K = 1, period = "year"))) |>
   glance()
 }

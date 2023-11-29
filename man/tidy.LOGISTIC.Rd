@@ -15,8 +15,7 @@
 Returns the coefficients from the model in a \code{tibble} format.
 }
 \examples{
-as_tsibble(USAccDeaths) |>
-  dplyr::mutate(y = value > mean(value)) |>
-  model(logistic  = LOGISTIC(y ~ season())) \%>\%
+melb_rain |>
+  model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
   tidy()
 }

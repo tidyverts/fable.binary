@@ -45,11 +45,11 @@ train_nnet <- function(.data, specials, n_nodes, n_networks, scale_inputs, wts =
     }
     scales <- list(xreg = xreg_scale)
   }
-  
+
   if (is.null(n_nodes)) {
     n_nodes <- round((NCOL(xreg) + 1) / 2)
   }
-  
+
   # Remove missing values if present
   j <- complete.cases(xreg, y)
   xreg <- xreg[j, , drop = FALSE]
@@ -153,9 +153,8 @@ specials_nnet <- new_specials(
 #'
 #' @inheritParams generics::forecast
 #' @param specials (passed by [`fabletools::forecast.mdl_df()`]).
-#' @param bootstrap If `TRUE`, then forecast distributions are computed using simulation with resampled errors.
-#' @param times The number of sample paths to use in estimating the forecast distribution when `bootstrap = TRUE`.
-#' @param simulate If `TRUE`, then forecast distributions are computed using simulation with Gaussian errors.
+#' @param times The number of sample paths to use in estimating the forecast distribution when `simulate = TRUE`.
+#' @param simulate If `TRUE`, then forecast distributions are computed using simulation from a Bernoulli model.
 #' @param new_data A tsibble containing the time points and exogenous regressors to produce forecasts for.
 #'
 #' @examples
@@ -175,21 +174,21 @@ forecast.BINNET <- function(object, new_data, specials = NULL, simulate = TRUE, 
       xreg <- scale(xreg, center = object$scales$xreg$center, scale = object$scales$xreg$scale)
     }
   }
-  
-  # Compute means of future periods  
-  pred <- lapply(object$model, stats::predict, newdata = xreg) |> 
-    unlist() |> 
-    matrix(ncol = length(object$model)) |> 
+
+  # Compute means of future periods
+  pred <- lapply(object$model, stats::predict, newdata = xreg) |>
+    unlist() |>
+    matrix(ncol = length(object$model)) |>
     rowMeans()
-  
+
   # Compute forecast distributions
   if (!simulate) {
     warn("Analytical forecast distributions are not available for BINNET.")
   }
   if(times == 0L)
     simulate <- FALSE
-  if(simulate) {  
-    sim <- purrr::map(pred, function(x) {  
+  if(simulate) {
+    sim <- purrr::map(pred, function(x) {
       rbinom(n = times, size = 1, prob = x)
     })
     distributional::dist_sample(sim)
@@ -202,13 +201,9 @@ forecast.BINNET <- function(object, new_data, specials = NULL, simulate = TRUE, 
 #' Generate new data from a fable model
 #'
 #'  Simulates future paths from a dataset using a fitted model.
-#'  Innovations are sampled by the model's assumed error distribution.
-#'  If bootstrap is TRUE, innovations will be sampled from the model's residuals.
-#'  If new_data contains the .innov column, those values will be treated as innovations.
 #'
 #' @inheritParams generics::generate
 #' @param specials (passed by [`fabletools::generate.mdl_df()`]).
-#' @param bootstrap If `TRUE`, then innovations are sampled from the model's residuals.
 #' @param new_data A tsibble containing the time points and exogenous regressors to produce forecasts for.
 #'
 #' @examples
@@ -225,13 +220,13 @@ generate.BINNET <- function(x, new_data, specials = NULL, ...) {
       xreg <- scale(xreg, center = x$scales$xreg$center, scale = x$scales$xreg$scale)
     }
   }
-  # Compute means of future periods  
-  pred <- lapply(x$model, predict, newdata = xreg) |> 
-    unlist() |> 
-    matrix(ncol = length(x$model)) |> 
+  # Compute means of future periods
+  pred <- lapply(x$model, predict, newdata = xreg) |>
+    unlist() |>
+    matrix(ncol = length(x$model)) |>
     rowMeans()
   # Generate sample
-  transmute(new_data, 
+  transmute(new_data,
     .sim = rbinom(n = NROW(new_data), size = 1, prob = pred))
 }
 
@@ -289,7 +284,7 @@ glance.BINNET <- function(x, ...) {
          weights = length(x$model[[1]]$wts),
          repeats = length(x$model),
          sigma2 = x$fit$sigma2)
-  
+
 }
 
 #' Tidy a fable model

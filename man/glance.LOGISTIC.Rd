@@ -22,8 +22,7 @@ Contains the R squared (\code{r_squared}), variance of residuals (\code{sigma2})
 the log-likelihood (\code{log_lik}), and information criterion (\code{AIC}, \code{AICc}, \code{BIC}).
 }
 \examples{
-as_tsibble(USAccDeaths) |>
-  dplyr::mutate(y = value > mean(value)) |>
-  model(logistic  = LOGISTIC(y ~ season())) \%>\%
+melb_rain |>
+  model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
   glance()
 }

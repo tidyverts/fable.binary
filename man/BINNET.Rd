@@ -37,8 +37,7 @@ fitted, each with random starting weights. These are then averaged when
 computing forecasts.
 }
 \examples{
-as_tsibble(USAccDeaths) |>
-  dplyr::mutate(y = value > mean(value)) |>
-  model(nn = BINNET(y ~ season()))
+melb_rain |>
+  model(nn = BINNET(Wet ~ fourier(K = 1, period = "year")))
 
 }
