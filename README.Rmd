@@ -27,3 +27,9 @@ You can install the **development** version from
 # install.packages("remotes")
 remotes::install_github("robjhyndman/binary.fable")
 ```
+
+## Examples
+
+```{r example, echo = TRUE}
+
+```
