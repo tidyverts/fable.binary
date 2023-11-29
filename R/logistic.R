@@ -152,14 +152,21 @@ tidy.LOGISTIC <- function(x, ...) {
   rdf <- x$df.residual
   coef <- x$coefficients
   rank <- x$rank
-
-  R <- chol2inv(x$qr$qr[seq_len(rank), seq_len(rank), drop = FALSE])
-
-  se <- rep(NA_real_, nrow(coef))
-  se[!is.na(coef)] <- sqrt(diag(R) * x$sigma2) # map(resvar, function(resvar) sqrt(diag(R) * resvar)) #for multiple response logistic
+  
+  if(rank > 0) {
+    p1 <- seq(rank)
+    Qr <- x$qr
+    coef.p <- coef[Qr$pivot[p1]]
+    covmat.unscaled <- chol2inv(Qr$qr[p1, p1, drop = FALSE])
+    dimnames(covmat.unscaled) <- list(names(coef.p), names(coef.p))
+    covmat <- covmat.unscaled
+    var.cf <- diag(covmat)
+    se <- sqrt(var.cf)
+    tvalue <- coef.p/se
+  }
 
   out <- tidyr::gather(
-    dplyr::as_tibble(x$coefficients, rownames = "term"),
+    dplyr::as_tibble(coef, rownames = "term"),
     ".response", "estimate", !!!syms(colnames(coef))
   )
   if (NCOL(coef) == 1) out[[".response"]] <- NULL
@@ -167,7 +174,7 @@ tidy.LOGISTIC <- function(x, ...) {
     out,
     std.error = unlist(se),
     statistic = !!sym("estimate") / !!sym("std.error"),
-    p.value = 2 * stats::pt(abs(!!sym("statistic")), rdf, lower.tail = FALSE)
+    p.value = 2 * stats::pnorm(abs(!!sym("statistic")), lower.tail = FALSE)
   )
 }
 
