@@ -330,7 +330,9 @@ refit.LOGISTIC <- function(object, new_data, specials = NULL, reestimate = FALSE
   coef <- object$coefficients
   fit$qr <- qr(xreg)
   piv <- fit$qr$pivot[seq_len(fit$rank)]
-  fit$fitted.values <- xreg[, piv, drop = FALSE] %*% coef[piv]
+  pred <- xreg[, piv, drop = FALSE] %*% coef[piv]
+  # Transform back to probability
+  fit$fitted.values <- exp(pred)/(1+exp(pred))
   fit$residuals <- y - fit$fitted.values
   fit$sigma2 <- sum(fit$residuals^2, na.rm = TRUE)/fit$df.residual
 
