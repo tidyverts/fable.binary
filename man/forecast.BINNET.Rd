@@ -4,15 +4,7 @@
 \alias{forecast.BINNET}
 \title{Forecast a model from the fable package}
 \usage{
-\method{forecast}{BINNET}(
-  object,
-  new_data,
-  specials = NULL,
-  simulate = TRUE,
-  bootstrap = FALSE,
-  times = 1000,
-  ...
-)
+\method{forecast}{BINNET}(object, new_data, specials = NULL, simulate = TRUE, times = 5000, ...)
 }
 \arguments{
 \item{object}{A model for which forecasts are required.}
@@ -23,11 +15,11 @@
 
 \item{simulate}{If \code{TRUE}, then forecast distributions are computed using simulation with Gaussian errors.}
 
-\item{bootstrap}{If \code{TRUE}, then forecast distributions are computed using simulation with resampled errors.}
-
 \item{times}{The number of sample paths to use in estimating the forecast distribution when \code{bootstrap = TRUE}.}
 
 \item{...}{Other arguments passed to methods}
+
+\item{bootstrap}{If \code{TRUE}, then forecast distributions are computed using simulation with resampled errors.}
 }
 \description{
 Produces forecasts from a trained model.

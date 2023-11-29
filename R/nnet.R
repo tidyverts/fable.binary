@@ -164,7 +164,7 @@ specials_nnet <- new_specials(
 #'   model(nn = BINNET(box_cox(value, 0.15))) %>%
 #'   forecast(times = 10)
 #' @export
-forecast.BINNET <- function(object, new_data, specials = NULL, simulate = TRUE, bootstrap = FALSE, times = 1000, ...) {
+forecast.BINNET <- function(object, new_data, specials = NULL, simulate = TRUE, times = 5000, ...) {
   require_package("nnet")
 
   # Prepare xreg
@@ -176,26 +176,27 @@ forecast.BINNET <- function(object, new_data, specials = NULL, simulate = TRUE, 
       xreg <- scale(xreg, center = object$scales$xreg$center, scale = object$scales$xreg$scale)
     }
   }
-
-  # Compute forecast intervals
+  
+  # Compute means of future periods  
+  pred <- lapply(object$model, predict, newdata = xreg) |> 
+    unlist() |> 
+    matrix(ncol = length(object$model)) |> 
+    rowMeans()
+  
+  # Compute forecast distributions
   if (!simulate) {
     warn("Analytical forecast distributions are not available for BINNET.")
-    times <- 0
   }
-  sim <- map(seq_len(times), function(x) {
-    generate(object, new_data, specials = specials, bootstrap = bootstrap)[[".sim"]]
-  })
-  if (length(sim) > 0) {
-    sim <- sim %>%
-      transpose() %>%
-      map(as.numeric)
+  if(times == 0L)
+    simulate <- FALSE
+  if(simulate) {  
+    sim <- map(pred, function(x) {  
+      rbinom(n = times, size = 1, prob = x)
+    })
     distributional::dist_sample(sim)
-  }
-  else {
-    # Compute forecasts
-    h <- NROW(new_data)
-    fc <- mean(map_dbl(object$model, predict, newdata = new_data))
-    distributional::dist_degenerate(fc)
+  } else {
+    # Return mean as degenerate distribution
+    distributional::dist_degenerate(pred)
   }
 }
 
@@ -216,46 +217,23 @@ forecast.BINNET <- function(object, new_data, specials = NULL, simulate = TRUE, 
 #'   model(nn = BINNET(box_cox(value, 0.15))) %>%
 #'   generate()
 #' @export
-generate.BINNET <- function(x, new_data, specials = NULL, bootstrap = FALSE, ...) {
+generate.BINNET <- function(x, new_data, specials = NULL, ...) {
   # Prepare xreg
   xreg <- specials$xreg[[1]]
-
   if (!is.null(xreg)) {
     xreg <- as.matrix(xreg)
     if (!is.null(x$scales$xreg)) {
       xreg <- scale(xreg, center = x$scales$xreg$center, scale = x$scales$xreg$scale)
     }
   }
-
-  if (!(".innov" %in% names(new_data))) {
-    if (bootstrap) {
-      res <- stats::na.omit(x$est[[".resid"]] - mean(x$est[[".resid"]], na.rm = TRUE))
-      if (!is.null(x$scales$y)) {
-        res <- res / x$scales$y$scale
-      }
-      new_data$.innov <- sample(res, NROW(new_data), replace = TRUE)
-    }
-    else {
-      if (!is.null(x$scales$y)) {
-        sigma <- sd(x$est[[".resid"]] / x$scales$y$scale, na.rm = TRUE)
-      }
-      else {
-        sigma <- sqrt(x$fit$sigma2)
-      }
-      new_data$.innov <- stats::rnorm(NROW(new_data), sd = sigma)
-    }
-  }
-  else {
-    if (!is.null(x$scales$y)) {
-      new_data[[".innov"]] <- new_data[[".innov"]] / x$scales$y$scale
-    }
-  }
-
-  sim_nnet <- function(e) {
-    mean(map_dbl(x$model, predict, newdata = new_data))
-  }
-
-  transmute(group_by_key(new_data), ".sim" := sim_nnet(!!sym(".innov")))
+  # Compute means of future periods  
+  pred <- lapply(x$model, predict, newdata = xreg) |> 
+    unlist() |> 
+    matrix(ncol = length(x$model)) |> 
+    rowMeans()
+  # Generate sample
+  transmute(new_data, 
+    .sim = rbinom(n = NROW(new_data), size = 1, prob = pred))
 }
 
 #' Extract fitted values from a fable model

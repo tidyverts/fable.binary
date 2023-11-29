@@ -4,7 +4,7 @@
 \alias{generate.BINNET}
 \title{Generate new data from a fable model}
 \usage{
-\method{generate}{BINNET}(x, new_data, specials = NULL, bootstrap = FALSE, ...)
+\method{generate}{BINNET}(x, new_data, specials = NULL, ...)
 }
 \arguments{
 \item{x}{An object.}
@@ -13,9 +13,9 @@
 
 \item{specials}{(passed by \code{\link[fabletools:generate.mdl_df]{fabletools::generate.mdl_df()}}).}
 
-\item{bootstrap}{If \code{TRUE}, then innovations are sampled from the model's residuals.}
-
 \item{...}{Other arguments passed to methods}
+
+\item{bootstrap}{If \code{TRUE}, then innovations are sampled from the model's residuals.}
 }
 \description{
 Simulates future paths from a dataset using a fitted model.
