@@ -122,9 +122,8 @@ specials_logistic <- new_specials(
 #' [Forecasting: Principles and Practices, Time series regression models (chapter 6)](https://otexts.com/fpp3/regression.html)
 #'
 #' @examples
-#' as_tsibble(USAccDeaths) |>
-#'   dplyr::mutate(y = value > mean(value)) |>
-#'   model(logistic  = LOGISTIC(y ~ season()))
+#' melb_rain |>
+#'   model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year")))
 #'
 #' @export
 LOGISTIC <- function(formula) {
@@ -138,9 +137,8 @@ LOGISTIC <- function(formula) {
 #' @inherit fitted.BINNET
 #'
 #' @examples
-#' as_tsibble(USAccDeaths) |>
-#'   dplyr::mutate(y = value > mean(value)) |>
-#'   model(logistic  = LOGISTIC(y ~ season())) %>%
+#' melb_rain |>
+#'   model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
 #'   fitted()
 #' @export
 fitted.LOGISTIC <- function(object, ...) {
@@ -150,9 +148,8 @@ fitted.LOGISTIC <- function(object, ...) {
 #' @inherit residuals.BINNET
 #'
 #' @examples
-#' as_tsibble(USAccDeaths) |>
-#'   dplyr::mutate(y = value > mean(value)) |>
-#'   model(logistic  = LOGISTIC(y ~ season())) %>%
+#' melb_rain |>
+#'   model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
 #'   residuals()
 #' @export
 residuals.LOGISTIC <- function(object, ...) {
@@ -171,9 +168,8 @@ residuals.LOGISTIC <- function(object, ...) {
 #' @return A one row tibble summarising the model's fit.
 #'
 #' @examples
-#' as_tsibble(USAccDeaths) |>
-#'   dplyr::mutate(y = value > mean(value)) |>
-#'   model(logistic  = LOGISTIC(y ~ season())) %>%
+#' melb_rain |>
+#'   model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
 #'   glance()
 #' @export
 glance.LOGISTIC <- function(x, ...) {
@@ -183,9 +179,8 @@ glance.LOGISTIC <- function(x, ...) {
 #' @inherit tidy.BINNET
 #'
 #' @examples
-#' as_tsibble(USAccDeaths) |>
-#'   dplyr::mutate(y = value > mean(value)) |>
-#'   model(logistic  = LOGISTIC(y ~ season())) %>%
+#' melb_rain |>
+#'   model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
 #'   tidy()
 #' @export
 tidy.LOGISTIC <- function(x, ...) {
@@ -263,10 +258,9 @@ report.LOGISTIC <- function(object, digits = max(3, getOption("digits") - 3), ..
 #'   or reconciliation processes.
 #'
 #' @examples
-#' as_tsibble(USAccDeaths) |>
-#'   dplyr::mutate(y = value > mean(value)) |>
-#'   model(logistic  = LOGISTIC(y ~ season())) %>%
-#'   forecast()
+#' melb_rain |>
+#'   model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
+#'   forecast(h = "2 years")
 #' @export
 forecast.LOGISTIC <- function(object, new_data, 
               specials = NULL, simulate = FALSE, times = 5000, ...) {
@@ -303,9 +297,8 @@ forecast.LOGISTIC <- function(object, new_data,
 #' @inherit generate.BINNET
 #'
 #' @examples
-#' as_tsibble(USAccDeaths) |>
-#'   dplyr::mutate(y = value > mean(value)) |>
-#'   model(logistic  = LOGISTIC(y ~ season())) %>%
+#' melb_rain |>
+#'   model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
 #'   generate()
 #' @export
 generate.LOGISTIC <- function(x, new_data, specials, ...) {

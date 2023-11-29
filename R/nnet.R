@@ -127,9 +127,8 @@ wrap_nnet <- function(x, y, linout = FALSE, trace = FALSE, ...) {
 #' @return A model specification.
 #'
 #' @examples
-#' as_tsibble(USAccDeaths) |>
-#'   dplyr::mutate(y = value > mean(value)) |>
-#'   model(nn = BINNET(y ~ season()))
+#' melb_rain |>
+#'   model(nn = BINNET(Wet ~ fourier(K = 1, period = "year")))
 #'
 #' @export
 BINNET <- function(formula, n_nodes = NULL, n_networks = 20, scale_inputs = TRUE, ...) {
@@ -160,8 +159,8 @@ specials_nnet <- new_specials(
 #' @param new_data A tsibble containing the time points and exogenous regressors to produce forecasts for.
 #'
 #' @examples
-#' as_tsibble(airmiles) %>%
-#'   model(nn = BINNET(box_cox(value, 0.15))) %>%
+#' melb_rain |>
+#'   model(nn = BINNET(Wet ~ fourier(K = 1, period = "year"))) |>
 #'   forecast(times = 10)
 #' @export
 forecast.BINNET <- function(object, new_data, specials = NULL, simulate = TRUE, times = 5000, ...) {
@@ -213,8 +212,8 @@ forecast.BINNET <- function(object, new_data, specials = NULL, simulate = TRUE, 
 #' @param new_data A tsibble containing the time points and exogenous regressors to produce forecasts for.
 #'
 #' @examples
-#' as_tsibble(airmiles) %>%
-#'   model(nn = BINNET(box_cox(value, 0.15))) %>%
+#' melb_rain |>
+#'   model(nn = BINNET(Wet ~ fourier(K = 1, period = "year"))) |>
 #'   generate()
 #' @export
 generate.BINNET <- function(x, new_data, specials = NULL, ...) {
@@ -244,8 +243,8 @@ generate.BINNET <- function(x, new_data, specials = NULL, ...) {
 #' @param ... Other arguments ignored
 #'
 #' @examples
-#' as_tsibble(airmiles) %>%
-#'   model(nn = BINNET(box_cox(value, 0.15))) %>%
+#' melb_rain |>
+#'   model(nn = BINNET(Wet ~ fourier(K = 1, period = "year"))) |>
 #'   fitted()
 #' @export
 fitted.BINNET <- function(object, ...) {
@@ -261,8 +260,8 @@ fitted.BINNET <- function(object, ...) {
 #' @param ... Other arguments ignored
 #'
 #' @examples
-#' as_tsibble(airmiles) %>%
-#'   model(nn = BINNET(box_cox(value, 0.15))) %>%
+#' melb_rain |>
+#'   model(nn = BINNET(Wet ~ fourier(K = 1, period = "year"))) |>
 #'   residuals()
 #' @export
 residuals.BINNET <- function(object, ...) {
@@ -280,8 +279,8 @@ residuals.BINNET <- function(object, ...) {
 #' @return A one row tibble summarising the model's fit.
 #'
 #' @examples
-#' as_tsibble(airmiles) %>%
-#'   model(nn = BINNET(box_cox(value, 0.15))) %>%
+#' melb_rain |>
+#'   model(nn = BINNET(Wet ~ fourier(K = 1, period = "year"))) |>
 #'   glance()
 #' @export
 glance.BINNET <- function(x, ...) {
@@ -300,9 +299,8 @@ glance.BINNET <- function(x, ...) {
 #' @inheritParams generics::tidy
 #'
 #' @examples
-#' as_tsibble(USAccDeaths) |>
-#'   dplyr::mutate(y = value > mean(value)) |>
-#'   model(nn = BINNET(y ~ season())) |>
+#' melb_rain |>
+#'   model(nn = BINNET(Wet ~ fourier(K = 1, period = "year"))) |>
 #'   tidy()
 #' @export
 tidy.BINNET <- function(x, ...) {
