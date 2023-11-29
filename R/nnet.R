@@ -178,7 +178,7 @@ forecast.BINNET <- function(object, new_data, specials = NULL, simulate = TRUE, 
   }
   
   # Compute means of future periods  
-  pred <- lapply(object$model, predict, newdata = xreg) |> 
+  pred <- lapply(object$model, stats::predict, newdata = xreg) |> 
     unlist() |> 
     matrix(ncol = length(object$model)) |> 
     rowMeans()
@@ -190,7 +190,7 @@ forecast.BINNET <- function(object, new_data, specials = NULL, simulate = TRUE, 
   if(times == 0L)
     simulate <- FALSE
   if(simulate) {  
-    sim <- map(pred, function(x) {  
+    sim <- purrr::map(pred, function(x) {  
       rbinom(n = times, size = 1, prob = x)
     })
     distributional::dist_sample(sim)
