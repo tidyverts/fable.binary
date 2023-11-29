@@ -5,7 +5,7 @@
 ^appveyor\.yml$
 ^README\.Rmd$
 Makefile
-^binaryfable\.Rproj$
+^fable.binary\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^data-raw$
