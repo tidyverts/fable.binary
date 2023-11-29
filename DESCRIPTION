@@ -18,13 +18,14 @@ Depends:
     R (>= 3.4.0),
     fabletools (>= 0.3.0)
 Imports:
-    rlang (>= 0.4.6),
-    stats,
+    distributional,
     dplyr (>= 1.0.0),
     purrr,
-    tsibble (>= 0.9.0),
+    rlang (>= 0.4.6),
+    stats,
+    tibble,
     tidyr,
-    distributional
+    tsibble (>= 0.9.0)
 Suggests:
     nnet,
     testthat

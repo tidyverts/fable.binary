@@ -45,7 +45,7 @@ trend.numeric <- function(x, knots = NULL, origin = NULL) {
   }
   knots_exprs <- map(knots, function(.x) pmax(0, x - .x))
   knots_exprs <- set_names(
-    knots_exprs, 
+    knots_exprs,
     map_chr(knots, function(.x) paste0("trend_", format(.x)))
   )
   tibble(
@@ -112,8 +112,8 @@ fourier.numeric <- function(x, period, K, origin = NULL) {
       }
       names(out) <- paste0(names(out), name)
       out
-    }) %>%
-    set_names(NULL) %>%
+    }) |>
+    set_names(NULL) |>
     unlist(recursive = FALSE)
 
   tibble(!!!fourier_exprs)
