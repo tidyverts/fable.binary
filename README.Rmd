@@ -6,10 +6,10 @@ output: github_document
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+	collapse = TRUE,
+	comment = "#>",
+	fig.path = "man/figures/README-",
+	out.width = "100%"
 )
 ```
 
@@ -31,15 +31,29 @@ remotes::install_github("robjhyndman/fable.binary")
 ## Examples
 
 ```{r example, echo = TRUE}
+library(fable.binary)
+library(ggplot2)
+library(dplyr)
+
+# Fit models
 fit <- melb_rain |>
-  model(
-    nn = BINNET(Wet ~ fourier(K = 2, period = "year")),
-    logistic = LOGISTIC(Wet ~ fourier(K = 2, period = "year"))
-  )
+	model(
+		nn = BINNET(Wet ~ fourier(K = 1, period = "year")),
+		logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))
+	)
+
+# Functions for computing on models
 fit |> tidy()
 fit |> select(logistic) |> glance()
 fit |> select(logistic) |> report()
 fit |> select(nn) |> glance()
 fit |> select(nn) |> report()
 augment(fit)
+
+# Produce forecasts. For neural network, use 
+fc <- forecast(fit, h = "2 years")
+as_tibble(fc) |>
+	ggplot(aes(x = Date, y = .mean, col = .model)) +
+	geom_line() +
+	labs(y = "Probability of rain")
 ```
