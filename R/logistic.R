@@ -1,47 +1,14 @@
 glm_glance_measures <- function(fit) {
   # Set up fit measures
-  res <- fit$residuals[complete.cases(fit$residuals), , drop = FALSE]
-  fits <- fit$fitted[complete.cases(fit$fitted), , drop = FALSE]
-  n <- length(res)
-  rdf <- fit$df.residual
-  edf <- n - rdf
-  rank <- fit$rank
-
-  coef <- fit$coefficients
-  intercept <- "(Intercept)" %in% rownames(coef)
-
-  mss <- sum((fits - intercept * mean(fits))^2)
-  rss <- sum(res^2)
-  resvar <- rss / rdf
-
-  if (NROW(coef) - intercept == 0) {
-    r.squared <- adj.r.squared <- 0
-    fstatistic <- NA
-    p.value <- NA
-  }
-  else {
-    r.squared <- mss / (mss + rss)
-    adj.r.squared <- 1 - (1 - r.squared) * ((n - intercept) / rdf)
-    fstatistic <- (mss / (rank - intercept)) / resvar
-    p.value <- stats::pf(fstatistic, rank - intercept, rdf, lower.tail = FALSE)
-  }
-
-  influence <- stats::lm.influence(fit)
-
-  dev <- n * log(rss / n)
-  aic <- dev + 2 * edf + 2
+  n <- NROW(na.omit(fit$residuals))
+  edf <- n - fit$df.residual
   k <- edf - 1
-
-  loglik <- 0.5 * (-n * (log(2 * pi) + 1 - log(n) + log(rss)))
-
   list(
-    r_squared = r.squared, adj_r_squared = adj.r.squared,
-    sigma2 = resvar, statistic = fstatistic,
-    p_value = p.value, df = edf, log_lik = loglik,
-    AIC = aic, AICc = aic + 2 * (k + 2) * (k + 3) / (n - k - 3),
-    BIC = aic + (k + 2) * (log(n) - 2),
-    CV = mean((res / (1 - influence$hat))^2, na.rm = TRUE),
-    deviance = rss, df.residual = rdf, rank = rank
+    df = edf, log_lik = edf - 0.5*fit$aic,
+    AIC = fit$aic, AICc = fit$aic + 2 * (k + 2) * (k + 3) / (n - k - 3),
+    BIC = fit$aic + (k + 2) * (log(n) - 2),
+    deviance = fit$deviance, df.residual = fit$df.residual, rank = fit$rank,
+    null_deviance = fit$null.deviance, df_null = fit$df.null, nobs = n
   )
 }
 
