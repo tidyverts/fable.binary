@@ -20,6 +20,7 @@ Depends:
 Imports:
     distributional,
     dplyr (>= 1.0.0),
+    nnet,
     purrr,
     rlang (>= 0.4.6),
     stats,
@@ -27,8 +28,8 @@ Imports:
     tidyr,
     tsibble (>= 0.9.0)
 Suggests:
-    nnet,
-    testthat
+    broom,
+    testthat (>= 3.0.0)
 ByteCompile: true
 Encoding: UTF-8
 Language: en-GB
@@ -36,3 +37,4 @@ Roxygen: list(markdown = TRUE, roclets=c('rd', 'collate',
     'namespace'))
 RoxygenNote: 7.2.3
 LazyData: true
+Config/testthat/edition: 3
