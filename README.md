@@ -49,56 +49,53 @@ fit |> tidy()
 #> # A tibble: 11 × 6
 #>    .model   term                           estimate std.error statistic  p.value
 #>    <chr>    <chr>                             <dbl>     <dbl>     <dbl>    <dbl>
-#>  1 logistic "(Intercept)"                  -0.573      0.0678   -8.45   3.97e-17
-#>  2 logistic "fourier(K = 5, period = \"ye… -0.325      0.0966   -3.36   7.84e- 4
-#>  3 logistic "fourier(K = 5, period = \"ye… -0.279      0.0952   -2.93   3.43e- 3
-#>  4 logistic "fourier(K = 5, period = \"ye… -0.0203     0.0961   -0.211  8.33e- 1
-#>  5 logistic "fourier(K = 5, period = \"ye… -0.0312     0.0957   -0.326  7.44e- 1
-#>  6 logistic "fourier(K = 5, period = \"ye… -0.0696     0.0960   -0.725  4.69e- 1
-#>  7 logistic "fourier(K = 5, period = \"ye… -0.0207     0.0958   -0.216  8.29e- 1
-#>  8 logistic "fourier(K = 5, period = \"ye… -0.0342     0.0960   -0.357  7.21e- 1
-#>  9 logistic "fourier(K = 5, period = \"ye…  0.0224     0.0958    0.234  8.15e- 1
-#> 10 logistic "fourier(K = 5, period = \"ye… -0.0188     0.0956   -0.196  8.44e- 1
-#> 11 logistic "fourier(K = 5, period = \"ye…  0.00815    0.0958    0.0851 9.32e- 1
+#>  1 logistic "(Intercept)"                  -0.573      0.0321   -17.8   3.18e-71
+#>  2 logistic "fourier(K = 5, period = \"ye… -0.325      0.0458    -7.10  1.26e-12
+#>  3 logistic "fourier(K = 5, period = \"ye… -0.279      0.0451    -6.18  6.25e-10
+#>  4 logistic "fourier(K = 5, period = \"ye… -0.0203     0.0455    -0.446 6.56e- 1
+#>  5 logistic "fourier(K = 5, period = \"ye… -0.0312     0.0453    -0.688 4.91e- 1
+#>  6 logistic "fourier(K = 5, period = \"ye… -0.0696     0.0454    -1.53  1.26e- 1
+#>  7 logistic "fourier(K = 5, period = \"ye… -0.0207     0.0454    -0.457 6.48e- 1
+#>  8 logistic "fourier(K = 5, period = \"ye… -0.0342     0.0454    -0.754 4.51e- 1
+#>  9 logistic "fourier(K = 5, period = \"ye…  0.0224     0.0454     0.494 6.21e- 1
+#> 10 logistic "fourier(K = 5, period = \"ye… -0.0188     0.0453    -0.415 6.78e- 1
+#> 11 logistic "fourier(K = 5, period = \"ye…  0.00815    0.0453     0.180 8.57e- 1
 fit |> select(logistic) |> glance()
-#> # A tibble: 1 × 15
-#>   .model   r_squared adj_r_squared sigma2 statistic p_value    df log_lik   AIC
-#>   <chr>        <dbl>         <dbl>  <dbl>     <dbl>   <dbl> <int>   <dbl> <dbl>
-#> 1 logistic     0.376         0.375   4.46      260.       0    11  -9358. 6476.
-#> # ℹ 6 more variables: AICc <dbl>, BIC <dbl>, CV <dbl>, deviance <dbl>,
-#> #   df.residual <int>, rank <int>
+#> # A tibble: 1 × 12
+#>   .model      df log_lik   AIC  AICc   BIC deviance df.residual  rank
+#>   <chr>    <int>   <dbl> <dbl> <dbl> <dbl>    <dbl>       <int> <int>
+#> 1 logistic    11  -2787. 5596. 5596. 5672.    5574.        4311    11
+#> # ℹ 3 more variables: null_deviance <dbl>, df_null <int>, nobs <int>
 fit |> select(logistic) |> report()
 #> Series: Wet 
 #> Model: LOGISTIC 
 #> 
-#> Residuals:
-#>    Min     1Q Median     3Q    Max 
-#> -1.861 -1.655 -1.388  2.363  3.886 
-#> 
 #> Coefficients:
 #>                                        Estimate Std. Error t value Pr(>|t|)    
-#> (Intercept)                           -0.573059   0.067825  -8.449  < 2e-16 ***
-#> fourier(K = 5, period = "year")C1_365 -0.324774   0.096634  -3.361 0.000784 ***
-#> fourier(K = 5, period = "year")S1_365 -0.278737   0.095199  -2.928 0.003430 ** 
-#> fourier(K = 5, period = "year")C2_365 -0.020283   0.096138  -0.211 0.832917    
-#> fourier(K = 5, period = "year")S2_365 -0.031195   0.095695  -0.326 0.744457    
-#> fourier(K = 5, period = "year")C3_365 -0.069556   0.095990  -0.725 0.468726    
-#> fourier(K = 5, period = "year")S3_365 -0.020730   0.095831  -0.216 0.828752    
-#> fourier(K = 5, period = "year")C4_365 -0.034241   0.095966  -0.357 0.721255    
-#> fourier(K = 5, period = "year")S4_365  0.022435   0.095834   0.234 0.814915    
-#> fourier(K = 5, period = "year")C5_365 -0.018772   0.095622  -0.196 0.844371    
-#> fourier(K = 5, period = "year")S5_365  0.008153   0.095752   0.085 0.932152    
+#> (Intercept)                           -0.573059   0.032114 -17.845  < 2e-16 ***
+#> fourier(K = 5, period = "year")C1_365 -0.324774   0.045754  -7.098 1.26e-12 ***
+#> fourier(K = 5, period = "year")S1_365 -0.278737   0.045075  -6.184 6.25e-10 ***
+#> fourier(K = 5, period = "year")C2_365 -0.020283   0.045519  -0.446    0.656    
+#> fourier(K = 5, period = "year")S2_365 -0.031195   0.045310  -0.688    0.491    
+#> fourier(K = 5, period = "year")C3_365 -0.069556   0.045449  -1.530    0.126    
+#> fourier(K = 5, period = "year")S3_365 -0.020730   0.045374  -0.457    0.648    
+#> fourier(K = 5, period = "year")C4_365 -0.034241   0.045438  -0.754    0.451    
+#> fourier(K = 5, period = "year")S4_365  0.022435   0.045375   0.494    0.621    
+#> fourier(K = 5, period = "year")C5_365 -0.018772   0.045275  -0.415    0.678    
+#> fourier(K = 5, period = "year")S5_365  0.008153   0.045337   0.180    0.857    
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
-#> Residual standard error: 2.112 on 4311 degrees of freedom
-#> Multiple R-squared: 0.376,   Adjusted R-squared: 0.3746
-#> F-statistic: 259.8 on 10 and 4311 DF, p-value: < 2.22e-16
+#> # A tibble: 1 × 11
+#>      df log_lik   AIC  AICc   BIC deviance df.residual  rank null_deviance
+#>   <int>   <dbl> <dbl> <dbl> <dbl>    <dbl>       <int> <int>         <dbl>
+#> 1    11  -2787. 5596. 5596. 5672.    5574.        4311    11         5668.
+#> # ℹ 2 more variables: df_null <int>, nobs <int>
 fit |> select(nn) |> glance()
 #> # A tibble: 1 × 6
 #>   .model inputs hidden_nodes weights repeats sigma2
 #>   <chr>   <dbl>        <dbl>   <int>   <int>  <dbl>
-#> 1 nn          2            2       9      20  0.226
+#> 1 nn          2            2       9      20  0.227
 fit |> select(nn) |> report()
 #> Series: Wet 
 #> Model: BINNET: 2 
@@ -107,22 +104,22 @@ fit |> select(nn) |> report()
 #> a 2-2-1 network with 9 weights
 #> options were -
 #> 
-#> sigma^2 estimated as 0.2264
+#> sigma^2 estimated as 0.2265
 augment(fit)
 #> # A tsibble: 8,644 x 6 [1D]
 #> # Key:       .model [2]
 #>    .model Date       Wet   .fitted .resid .innov
 #>    <chr>  <date>     <lgl>   <dbl>  <dbl>  <dbl>
-#>  1 nn     2000-01-01 TRUE    0.268  0.732  0.732
-#>  2 nn     2000-01-02 FALSE   0.267 -0.267 -0.267
-#>  3 nn     2000-01-03 FALSE   0.266 -0.266 -0.266
-#>  4 nn     2000-01-04 TRUE    0.265  0.735  0.735
-#>  5 nn     2000-01-05 TRUE    0.264  0.736  0.736
-#>  6 nn     2000-01-06 FALSE   0.263 -0.263 -0.263
-#>  7 nn     2000-01-07 FALSE   0.263 -0.263 -0.263
-#>  8 nn     2000-01-08 FALSE   0.262 -0.262 -0.262
-#>  9 nn     2000-01-09 FALSE   0.262 -0.262 -0.262
-#> 10 nn     2000-01-10 TRUE    0.261  0.739  0.739
+#>  1 nn     2000-01-01 TRUE    0.265  0.735  0.735
+#>  2 nn     2000-01-02 FALSE   0.264 -0.264 -0.264
+#>  3 nn     2000-01-03 FALSE   0.262 -0.262 -0.262
+#>  4 nn     2000-01-04 TRUE    0.261  0.739  0.739
+#>  5 nn     2000-01-05 TRUE    0.261  0.739  0.739
+#>  6 nn     2000-01-06 FALSE   0.260 -0.260 -0.260
+#>  7 nn     2000-01-07 FALSE   0.259 -0.259 -0.259
+#>  8 nn     2000-01-08 FALSE   0.258 -0.258 -0.258
+#>  9 nn     2000-01-09 FALSE   0.258 -0.258 -0.258
+#> 10 nn     2000-01-10 TRUE    0.258  0.742  0.742
 #> # ℹ 8,634 more rows
 
 # Produce forecasts. For neural network, use 
