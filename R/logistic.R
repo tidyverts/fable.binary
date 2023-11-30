@@ -19,10 +19,11 @@ train_logistic <- function(.data, specials, ...) {
   keep <- complete.cases(xreg) & complete.cases(y)
   fit <- stats::glm.fit(xreg[keep, , drop = FALSE], y[keep, , drop = FALSE],
                         family = stats::binomial())
-  resid <- matrix(nrow = nrow(y), ncol = ncol(y))
+  resid <- fits <- matrix(nrow = nrow(y), ncol = ncol(y))
   resid[keep, ] <- as.matrix(fit$residuals)
   fit$residuals <- resid
-  fit$fitted.values <- y - resid
+  fits[keep, ] <- as.matrix(fit$fitted.values)
+  fit$fitted.values <- fits
 
   if (is_empty(fit$coefficients)) {
     fit$coefficients <- matrix(nrow = 0, ncol = NCOL(y))
@@ -34,7 +35,7 @@ train_logistic <- function(.data, specials, ...) {
 
   # Remove unused structure
   fit$effects <- NULL
-  fit$sigma2 <- sum(resid^2, na.rm = TRUE)/fit$df.residual
+  #fit$sigma2 <- sum(resid^2, na.rm = TRUE)/fit$df.residual
 
   structure(fit, class = "LOGISTIC")
 }
