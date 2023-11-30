@@ -64,7 +64,7 @@ fit |> select(logistic) |> glance()
 #> # A tibble: 1 × 12
 #>   .model      df log_lik   AIC  AICc   BIC deviance df.residual  rank
 #>   <chr>    <int>   <dbl> <dbl> <dbl> <dbl>    <dbl>       <int> <int>
-#> 1 logistic    11  -2787. 5596. 5596. 5672.    5574.        4311    11
+#> 1 logistic    11  -2787. 5596. 5596. 5666.    5574.        4311    11
 #> # ℹ 3 more variables: null_deviance <dbl>, df_null <int>, nobs <int>
 fit |> select(logistic) |> report()
 #> Series: Wet 
@@ -89,7 +89,7 @@ fit |> select(logistic) |> report()
 #> # A tibble: 1 × 11
 #>      df log_lik   AIC  AICc   BIC deviance df.residual  rank null_deviance
 #>   <int>   <dbl> <dbl> <dbl> <dbl>    <dbl>       <int> <int>         <dbl>
-#> 1    11  -2787. 5596. 5596. 5672.    5574.        4311    11         5668.
+#> 1    11  -2787. 5596. 5596. 5666.    5574.        4311    11         5668.
 #> # ℹ 2 more variables: df_null <int>, nobs <int>
 fit |> select(nn) |> glance()
 #> # A tibble: 1 × 6
@@ -104,22 +104,22 @@ fit |> select(nn) |> report()
 #> a 2-2-1 network with 9 weights
 #> options were -
 #> 
-#> sigma^2 estimated as 0.2265
+#> sigma^2 estimated as 0.2269
 augment(fit)
 #> # A tsibble: 8,644 x 6 [1D]
 #> # Key:       .model [2]
 #>    .model Date       Wet   .fitted .resid .innov
 #>    <chr>  <date>     <lgl>   <dbl>  <dbl>  <dbl>
-#>  1 nn     2000-01-01 TRUE    0.265  0.735  0.735
-#>  2 nn     2000-01-02 FALSE   0.264 -0.264 -0.264
-#>  3 nn     2000-01-03 FALSE   0.262 -0.262 -0.262
-#>  4 nn     2000-01-04 TRUE    0.261  0.739  0.739
-#>  5 nn     2000-01-05 TRUE    0.261  0.739  0.739
-#>  6 nn     2000-01-06 FALSE   0.260 -0.260 -0.260
-#>  7 nn     2000-01-07 FALSE   0.259 -0.259 -0.259
-#>  8 nn     2000-01-08 FALSE   0.258 -0.258 -0.258
-#>  9 nn     2000-01-09 FALSE   0.258 -0.258 -0.258
-#> 10 nn     2000-01-10 TRUE    0.258  0.742  0.742
+#>  1 nn     2000-01-01 TRUE    0.255  0.745  0.745
+#>  2 nn     2000-01-02 FALSE   0.254 -0.254 -0.254
+#>  3 nn     2000-01-03 FALSE   0.253 -0.253 -0.253
+#>  4 nn     2000-01-04 TRUE    0.252  0.748  0.748
+#>  5 nn     2000-01-05 TRUE    0.251  0.749  0.749
+#>  6 nn     2000-01-06 FALSE   0.250 -0.250 -0.250
+#>  7 nn     2000-01-07 FALSE   0.249 -0.249 -0.249
+#>  8 nn     2000-01-08 FALSE   0.248 -0.248 -0.248
+#>  9 nn     2000-01-09 FALSE   0.248 -0.248 -0.248
+#> 10 nn     2000-01-10 TRUE    0.247  0.753  0.753
 #> # ℹ 8,634 more rows
 
 # Produce forecasts. For neural network, use 
