@@ -1,6 +1,6 @@
 Package: fable.binary
 Title: Forecasting Binary Time Series
-Version: 0.3.2.9000
+Version: 0.1.0
 Description: Provides a collection of time series forecasting models suitable for binary time series. These models work within the 'fable' framework provided by the 'fabletools' package, which provides the tools to evaluate, visualise, and combine models in a workflow consistent with the tidyverse.
 Authors@R:
     c(person(given = "Rob",
