@@ -25,5 +25,5 @@ Extracts the residuals.
 \examples{
 melb_rain |>
   model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
-  residuals()
+  residuals(type = "deviance")
 }

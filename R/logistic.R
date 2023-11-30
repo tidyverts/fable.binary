@@ -113,7 +113,7 @@ fitted.LOGISTIC <- function(object, ...) {
 #' @examples
 #' melb_rain |>
 #'   model(logistic = LOGISTIC(Wet ~ fourier(K = 5, period = "year"))) |>
-#'   residuals()
+#'   residuals(type = "deviance")
 #' @export
 residuals.LOGISTIC <- function(object,
     type = c("deviance", "innovation", "pearson", "working", "response", "partial"), 
@@ -147,9 +147,6 @@ residuals.LOGISTIC <- function(object,
     response = y - mu,
     partial = r
   )
-  if (!is.null(object$na.action)) {
-    res <- naresid(object$na.action, res)
-  }
   if (type == "partial") {
     res <- res + predict(object, type = "terms")
   }
