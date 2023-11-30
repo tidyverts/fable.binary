@@ -5,8 +5,8 @@ glm_glance_measures <- function(fit) {
   k <- edf - 1
   list(
     df = edf, log_lik = edf - 0.5*fit$aic,
-    AIC = fit$aic, AICc = fit$aic + 2 * (k + 2) * (k + 3) / (n - k - 3),
-    BIC = fit$aic + (k + 2) * (log(n) - 2),
+    AIC = fit$aic, AICc = fit$aic + 2 * (k + 1) * (k + 2) / (n - k - 2),
+    BIC = fit$aic + (k + 1) * (log(n) - 2),
     deviance = fit$deviance, df.residual = fit$df.residual, rank = fit$rank,
     null_deviance = fit$null.deviance, df_null = fit$df.null, nobs = n
   )
