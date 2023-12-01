@@ -43,4 +43,4 @@ reference:
   - title: "Data"
     desc: "Data sets in the package"
     contents:
-      - melb_temp
+      - melb_rain
