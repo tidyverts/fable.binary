@@ -14,11 +14,11 @@ tidyverse.
 ## Installation
 
 You can install the **development** version from
-[GitHub](https://github.com/robjhyndman/fable.binary)
+[GitHub](https://github.com/tidyverts/fable.binary)
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("robjhyndman/fable.binary")
+remotes::install_github("tidyverts/fable.binary")
 ```
 
 ## Examples
@@ -28,13 +28,13 @@ library(fable.binary)
 #> Loading required package: fabletools
 library(ggplot2)
 library(dplyr)
-#> 
+#>
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
-#> 
+#>
 #>     filter, lag
 #> The following objects are masked from 'package:base':
-#> 
+#>
 #>     intersect, setdiff, setequal, union
 
 # Fit models
@@ -67,25 +67,25 @@ fit |> select(logistic) |> glance()
 #> 1 logistic    11  -2787. 5596. 5596. 5666.    5574.        4311    11
 #> # ℹ 3 more variables: null_deviance <dbl>, df_null <int>, nobs <int>
 fit |> select(logistic) |> report()
-#> Series: Wet 
-#> Model: LOGISTIC 
-#> 
+#> Series: Wet
+#> Model: LOGISTIC
+#>
 #> Coefficients:
-#>                                        Estimate Std. Error t value Pr(>|t|)    
+#>                                        Estimate Std. Error t value Pr(>|t|)
 #> (Intercept)                           -0.573059   0.032114 -17.845  < 2e-16 ***
 #> fourier(K = 5, period = "year")C1_365 -0.324774   0.045754  -7.098 1.26e-12 ***
 #> fourier(K = 5, period = "year")S1_365 -0.278737   0.045075  -6.184 6.25e-10 ***
-#> fourier(K = 5, period = "year")C2_365 -0.020283   0.045519  -0.446    0.656    
-#> fourier(K = 5, period = "year")S2_365 -0.031195   0.045310  -0.688    0.491    
-#> fourier(K = 5, period = "year")C3_365 -0.069556   0.045449  -1.530    0.126    
-#> fourier(K = 5, period = "year")S3_365 -0.020730   0.045374  -0.457    0.648    
-#> fourier(K = 5, period = "year")C4_365 -0.034241   0.045438  -0.754    0.451    
-#> fourier(K = 5, period = "year")S4_365  0.022435   0.045375   0.494    0.621    
-#> fourier(K = 5, period = "year")C5_365 -0.018772   0.045275  -0.415    0.678    
-#> fourier(K = 5, period = "year")S5_365  0.008153   0.045337   0.180    0.857    
+#> fourier(K = 5, period = "year")C2_365 -0.020283   0.045519  -0.446    0.656
+#> fourier(K = 5, period = "year")S2_365 -0.031195   0.045310  -0.688    0.491
+#> fourier(K = 5, period = "year")C3_365 -0.069556   0.045449  -1.530    0.126
+#> fourier(K = 5, period = "year")S3_365 -0.020730   0.045374  -0.457    0.648
+#> fourier(K = 5, period = "year")C4_365 -0.034241   0.045438  -0.754    0.451
+#> fourier(K = 5, period = "year")S4_365  0.022435   0.045375   0.494    0.621
+#> fourier(K = 5, period = "year")C5_365 -0.018772   0.045275  -0.415    0.678
+#> fourier(K = 5, period = "year")S5_365  0.008153   0.045337   0.180    0.857
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-#> 
+#>
 #> # A tibble: 1 × 11
 #>      df log_lik   AIC  AICc   BIC deviance df.residual  rank null_deviance
 #>   <int>   <dbl> <dbl> <dbl> <dbl>    <dbl>       <int> <int>         <dbl>
@@ -97,13 +97,13 @@ fit |> select(nn) |> glance()
 #>   <chr>   <dbl>        <dbl>   <int>   <int>  <dbl>
 #> 1 nn          2            2       9      20  0.227
 fit |> select(nn) |> report()
-#> Series: Wet 
-#> Model: BINNET: 2 
-#> 
+#> Series: Wet
+#> Model: BINNET: 2
+#>
 #> Average of 20 networks, each of which is
 #> a 2-2-1 network with 9 weights
 #> options were -
-#> 
+#>
 #> sigma^2 estimated as 0.2269
 augment(fit)
 #> # A tsibble: 8,644 x 6 [1D]
@@ -122,7 +122,7 @@ augment(fit)
 #> 10 nn     2000-01-10 TRUE    0.247  0.753  0.753
 #> # ℹ 8,634 more rows
 
-# Produce forecasts. For neural network, use 
+# Produce forecasts. For neural network, use
 fc <- forecast(fit, h = "2 years")
 as_tibble(fc) |>
     ggplot(aes(x = Date, y = .mean, col = .model)) +

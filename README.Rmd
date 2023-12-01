@@ -21,11 +21,11 @@ The R package *fable.binary* provides a collection of time series forecasting mo
 ## Installation
 
 You can install the **development** version from
-[GitHub](https://github.com/robjhyndman/fable.binary)
+[GitHub](https://github.com/tidyverts/fable.binary)
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("remotes")
-remotes::install_github("robjhyndman/fable.binary")
+remotes::install_github("tidyverts/fable.binary")
 ```
 
 ## Examples
@@ -50,7 +50,7 @@ fit |> select(nn) |> glance()
 fit |> select(nn) |> report()
 augment(fit)
 
-# Produce forecasts. For neural network, use 
+# Produce forecasts. For neural network, use
 fc <- forecast(fit, h = "2 years")
 as_tibble(fc) |>
 	ggplot(aes(x = Date, y = .mean, col = .model)) +

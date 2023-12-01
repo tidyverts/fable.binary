@@ -1,4 +1,4 @@
-url: https://pkg.robjhyndman.com/fable.binary/
+url: http://tidyverts.github.io/fable.binary/
 template:
   bootstrap: 5
   theme: tango
@@ -25,7 +25,7 @@ navbar:
       href: news/index.html
   right:
     - icon: fa-github fa-lg
-      href: https://github.com/robjhyndman/fable.binary
+      href: https://github.com/tidyverts/fable.binary
 
 reference:
   - title: "Functions"
