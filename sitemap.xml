@@ -1,78 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/404.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/404.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/authors.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/authors.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/index.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/index.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/news/index.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/news/index.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/BINNET.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/BINNET.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/LOGISTIC.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/LOGISTIC.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/common_xregs.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/common_xregs.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/fable.binary-package.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/fable.binary-package.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/fitted.BINNET.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/fitted.BINNET.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/fitted.LOGISTIC.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/fitted.LOGISTIC.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/forecast.BINNET.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/forecast.BINNET.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/forecast.LOGISTIC.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/forecast.LOGISTIC.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/generate.BINNET.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/generate.BINNET.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/generate.LOGISTIC.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/generate.LOGISTIC.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/glance.BINNET.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/glance.BINNET.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/glance.LOGISTIC.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/glance.LOGISTIC.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/index.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/melb_rain.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/melb_rain.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/reexports.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/reexports.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/refit.BINNET.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/refit.BINNET.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/refit.LOGISTIC.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/refit.LOGISTIC.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/residuals.BINNET.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/residuals.BINNET.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/residuals.LOGISTIC.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/residuals.LOGISTIC.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/tidy.BINNET.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/tidy.BINNET.html</loc>
   </url>
   <url>
-    <loc>https://pkg.robjhyndman.com/fable.binary/reference/tidy.LOGISTIC.html</loc>
+    <loc>http://tidyverts.github.io/fable.binary/reference/tidy.LOGISTIC.html</loc>
   </url>
 </urlset>

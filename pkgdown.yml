@@ -2,8 +2,8 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2023-12-01T00:49Z
+last_built: 2023-12-01T01:19Z
 urls:
-  reference: https://pkg.robjhyndman.com/fable.binary/reference
-  article: https://pkg.robjhyndman.com/fable.binary/articles
+  reference: http://tidyverts.github.io/fable.binary/reference
+  article: http://tidyverts.github.io/fable.binary/articles
 

@@ -49,7 +49,7 @@
 
       <ul class="navbar-nav">
 <li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/robjhyndman/fable.binary">
+  <a class="external-link nav-link" href="https://github.com/tidyverts/fable.binary">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -69,26 +69,26 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the <strong>development</strong> version from <a href="https://github.com/robjhyndman/fable.binary" class="external-link">GitHub</a></p>
+<p>You can install the <strong>development</strong> version from <a href="https://github.com/tidyverts/fable.binary" class="external-link">GitHub</a></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"robjhyndman/fable.binary"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"tidyverts/fable.binary"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/robjhyndman/fable.binary" class="external-link">fable.binary</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverts/fable.binary" class="external-link">fable.binary</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: fabletools</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt;     filter, lag</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
 <span></span>
 <span><span class="co"># Fit models</span></span>
@@ -121,25 +121,25 @@
 <span><span class="co">#&gt; 1 logistic    11  -2787. 5596. 5596. 5666.    5574.        4311    11</span></span>
 <span><span class="co">#&gt; # ℹ 3 more variables: null_deviance &lt;dbl&gt;, df_null &lt;int&gt;, nobs &lt;int&gt;</span></span>
 <span><span class="va">fit</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">logistic</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://fabletools.tidyverts.org/reference/report.html" class="external-link">report</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Series: Wet </span></span>
-<span><span class="co">#&gt; Model: LOGISTIC </span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Series: Wet</span></span>
+<span><span class="co">#&gt; Model: LOGISTIC</span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; Coefficients:</span></span>
-<span><span class="co">#&gt;                                        Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">#&gt;                                        Estimate Std. Error t value Pr(&gt;|t|)</span></span>
 <span><span class="co">#&gt; (Intercept)                           -0.573059   0.032114 -17.845  &lt; 2e-16 ***</span></span>
 <span><span class="co">#&gt; fourier(K = 5, period = "year")C1_365 -0.324774   0.045754  -7.098 1.26e-12 ***</span></span>
 <span><span class="co">#&gt; fourier(K = 5, period = "year")S1_365 -0.278737   0.045075  -6.184 6.25e-10 ***</span></span>
-<span><span class="co">#&gt; fourier(K = 5, period = "year")C2_365 -0.020283   0.045519  -0.446    0.656    </span></span>
-<span><span class="co">#&gt; fourier(K = 5, period = "year")S2_365 -0.031195   0.045310  -0.688    0.491    </span></span>
-<span><span class="co">#&gt; fourier(K = 5, period = "year")C3_365 -0.069556   0.045449  -1.530    0.126    </span></span>
-<span><span class="co">#&gt; fourier(K = 5, period = "year")S3_365 -0.020730   0.045374  -0.457    0.648    </span></span>
-<span><span class="co">#&gt; fourier(K = 5, period = "year")C4_365 -0.034241   0.045438  -0.754    0.451    </span></span>
-<span><span class="co">#&gt; fourier(K = 5, period = "year")S4_365  0.022435   0.045375   0.494    0.621    </span></span>
-<span><span class="co">#&gt; fourier(K = 5, period = "year")C5_365 -0.018772   0.045275  -0.415    0.678    </span></span>
-<span><span class="co">#&gt; fourier(K = 5, period = "year")S5_365  0.008153   0.045337   0.180    0.857    </span></span>
+<span><span class="co">#&gt; fourier(K = 5, period = "year")C2_365 -0.020283   0.045519  -0.446    0.656</span></span>
+<span><span class="co">#&gt; fourier(K = 5, period = "year")S2_365 -0.031195   0.045310  -0.688    0.491</span></span>
+<span><span class="co">#&gt; fourier(K = 5, period = "year")C3_365 -0.069556   0.045449  -1.530    0.126</span></span>
+<span><span class="co">#&gt; fourier(K = 5, period = "year")S3_365 -0.020730   0.045374  -0.457    0.648</span></span>
+<span><span class="co">#&gt; fourier(K = 5, period = "year")C4_365 -0.034241   0.045438  -0.754    0.451</span></span>
+<span><span class="co">#&gt; fourier(K = 5, period = "year")S4_365  0.022435   0.045375   0.494    0.621</span></span>
+<span><span class="co">#&gt; fourier(K = 5, period = "year")C5_365 -0.018772   0.045275  -0.415    0.678</span></span>
+<span><span class="co">#&gt; fourier(K = 5, period = "year")S5_365  0.008153   0.045337   0.180    0.857</span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 11</span></span>
 <span><span class="co">#&gt;      df log_lik   AIC  AICc   BIC deviance df.residual  rank null_deviance</span></span>
 <span><span class="co">#&gt;   &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;         &lt;dbl&gt;</span></span>
@@ -151,13 +151,13 @@
 <span><span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt;        &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;  &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; 1 nn          2            2       9      20  0.227</span></span>
 <span><span class="va">fit</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">nn</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://fabletools.tidyverts.org/reference/report.html" class="external-link">report</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Series: Wet </span></span>
-<span><span class="co">#&gt; Model: BINNET: 2 </span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Series: Wet</span></span>
+<span><span class="co">#&gt; Model: BINNET: 2</span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; Average of 20 networks, each of which is</span></span>
 <span><span class="co">#&gt; a 2-2-1 network with 9 weights</span></span>
 <span><span class="co">#&gt; options were -</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; sigma^2 estimated as 0.2269</span></span>
 <span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tsibble: 8,644 x 6 [1D]</span></span>
@@ -176,7 +176,7 @@
 <span><span class="co">#&gt; 10 nn     2000-01-10 TRUE    0.247  0.753  0.753</span></span>
 <span><span class="co">#&gt; # ℹ 8,634 more rows</span></span>
 <span></span>
-<span><span class="co"># Produce forecasts. For neural network, use </span></span>
+<span><span class="co"># Produce forecasts. For neural network, use</span></span>
 <span><span class="va">fc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/forecast.html" class="external-link">forecast</a></span><span class="op">(</span><span class="va">fit</span>, h <span class="op">=</span> <span class="st">"2 years"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">fc</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Date</span>, y <span class="op">=</span> <span class="va">.mean</span>, col <span class="op">=</span> <span class="va">.model</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -188,8 +188,8 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/robjhyndman/fable.binary/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/robjhyndman/fable.binary/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/tidyverts/fable.binary/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/tidyverts/fable.binary/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
