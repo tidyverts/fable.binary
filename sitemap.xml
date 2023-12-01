@@ -1,78 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/404.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/index.html</loc>
   </url>
   <url>
-    <loc>/news/index.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/BINNET.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/BINNET.html</loc>
   </url>
   <url>
-    <loc>/reference/LOGISTIC.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/LOGISTIC.html</loc>
   </url>
   <url>
-    <loc>/reference/common_xregs.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/common_xregs.html</loc>
   </url>
   <url>
-    <loc>/reference/fable.binary-package.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/fable.binary-package.html</loc>
   </url>
   <url>
-    <loc>/reference/fitted.BINNET.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/fitted.BINNET.html</loc>
   </url>
   <url>
-    <loc>/reference/fitted.LOGISTIC.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/fitted.LOGISTIC.html</loc>
   </url>
   <url>
-    <loc>/reference/forecast.BINNET.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/forecast.BINNET.html</loc>
   </url>
   <url>
-    <loc>/reference/forecast.LOGISTIC.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/forecast.LOGISTIC.html</loc>
   </url>
   <url>
-    <loc>/reference/generate.BINNET.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/generate.BINNET.html</loc>
   </url>
   <url>
-    <loc>/reference/generate.LOGISTIC.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/generate.LOGISTIC.html</loc>
   </url>
   <url>
-    <loc>/reference/glance.BINNET.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/glance.BINNET.html</loc>
   </url>
   <url>
-    <loc>/reference/glance.LOGISTIC.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/glance.LOGISTIC.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/melb_rain.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/melb_rain.html</loc>
   </url>
   <url>
-    <loc>/reference/reexports.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/reexports.html</loc>
   </url>
   <url>
-    <loc>/reference/refit.BINNET.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/refit.BINNET.html</loc>
   </url>
   <url>
-    <loc>/reference/refit.LOGISTIC.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/refit.LOGISTIC.html</loc>
   </url>
   <url>
-    <loc>/reference/residuals.BINNET.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/residuals.BINNET.html</loc>
   </url>
   <url>
-    <loc>/reference/residuals.LOGISTIC.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/residuals.LOGISTIC.html</loc>
   </url>
   <url>
-    <loc>/reference/tidy.BINNET.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/tidy.BINNET.html</loc>
   </url>
   <url>
-    <loc>/reference/tidy.LOGISTIC.html</loc>
+    <loc>https://pkg.robjhyndman.com/fable.binary/reference/tidy.LOGISTIC.html</loc>
   </url>
 </urlset>
