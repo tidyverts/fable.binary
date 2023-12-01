@@ -173,10 +173,10 @@ common_xregs <- list(
       }
       origin <- self$origin
     }
-    as.matrix(fable:::trend(self$data, knots, origin))
+    as.matrix(fable.binary:::trend(self$data, knots, origin))
   },
   season = function(period = NULL) {
-    as_model_matrix(fable:::season(self$data, period))
+    as_model_matrix(fable.binary:::season(self$data, period))
   },
   fourier = function(period = NULL, K, origin = NULL) {
     if (is.null(origin)) {
@@ -185,7 +185,7 @@ common_xregs <- list(
       }
       origin <- self$origin
     }
-    as.matrix(fable:::fourier(self$data, period, K, origin))
+    as.matrix(fable.binary:::fourier(self$data, period, K, origin))
   }
 )
 
