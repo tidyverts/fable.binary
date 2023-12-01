@@ -1,0 +1,46 @@
+url: https://pkg.robjhyndman.com/fable.binary/
+template:
+  bootstrap: 5
+  theme: tango
+  bootswatch: flatly
+  bslib:
+    base_font: {google: "Fira Sans"}
+    heading_font: {google: "Fira Sans"}
+    code_font: "Hack, mono"
+    primary: "#234460"
+    link-color: "#234460"
+  includes:
+    in_header: <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
+
+authors:
+  Rob Hyndman:
+    href: http://robjhyndman.com
+
+navbar:
+  type: light
+  left:
+    - text: "Reference"
+      href: reference/index.html
+    - text: "Change Log"
+      href: news/index.html
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/robjhyndman/fable.binary
+
+reference:
+  - title: "Functions"
+    desc: "Functions for modelling and forecasting binary time series"
+    contents:
+      - LOGISTIC
+      - BINNET
+      - starts_with("fitted")
+      - starts_with("forecast")
+      - starts_with("generate")
+      - starts_with("glance")
+      - starts_with("refit")
+      - starts_with("residuals")
+      - starts_with("tidy")
+  - title: "Data"
+    desc: "Data sets in the package"
+    contents:
+      - melb_temp
