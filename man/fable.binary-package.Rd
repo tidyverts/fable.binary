@@ -11,7 +11,7 @@ Provides a collection of time series forecasting models suitable for binary time
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/tidyverts/fable.binary}
+  \item \url{https://tidyverts.github.io/fable.binary}
   \item Report bugs at \url{https://github.com/tidyverts/fable.binary/issues}
 }
 
