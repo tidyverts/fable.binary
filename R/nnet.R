@@ -52,11 +52,9 @@ train_nnet <- function(.data, specials, n_nodes, n_networks, scale_inputs, wts =
   }
 
   # Remove missing values if present
-  j <- complete.cases(xreg, y)
-  xreg <- xreg[j, , drop = FALSE]
-  y <- y[j]
+  nonmissing <- complete.cases(xreg, y)
   ## Stop if there's no data to fit
-  if (NROW(xreg) == 0) {
+  if (NROW(xreg[nonmissing, , drop = FALSE]) == 0) {
     abort("No data to fit (possibly due to missing values)")
   }
 
@@ -64,21 +62,23 @@ train_nnet <- function(.data, specials, n_nodes, n_networks, scale_inputs, wts =
   if (is.null(wts)) {
     nn_models <- map(
       seq_len(n_networks),
-      function(.) wrap_nnet(xreg, y, size = n_nodes, ...)
+      function(.) wrap_nnet(xreg[nonmissing, , drop = FALSE], y[nonmissing], size = n_nodes, ...)
     )
   } else {
     maxnwts <- max(lengths(wts), na.rm = TRUE)
     nn_models <- map(
       wts,
       function(i) {
-        wrap_nnet(x = xreg, y = y, size = n_nodes, MaxNWts = maxnwts, Wts = i, ...)
+        wrap_nnet(x = xreg[nonmissing, , drop = FALSE], y = y[nonmissing], size = n_nodes, MaxNWts = maxnwts, Wts = i, ...)
       })
   }
 
   # Calculate fitted values
   pred <- map_dbl(transpose(map(nn_models, predict)), function(x) mean(unlist(x)))
-  fits <- pred
+  fits <- y*NA
+  fits[nonmissing] <- pred
   res <- y - fits
+  
 
   # Construct model output
   structure(
